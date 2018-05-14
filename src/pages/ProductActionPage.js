@@ -1,21 +1,34 @@
 import React, { Component } from 'react';
-import './App.css';
-import Menu from './components/Menu';
-import ProductList from './components/ProductList';
 
 class App extends Component {
+    onSubmit=(e)=>{
+        e.preventDefault();
+    }
     render() {
         return (
-            <div>
-                <Menu />
-                <div className="container">
-                    <div className="row">
-                        <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                            <button type="button" className="btn btn-info mb-10">Add Product</button>
-                            <ProductList />
-                        </div>
+            <div className="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                <form onSubmit={this.onSubmit}>
+                    <legend>Product Detail</legend>
+                    <div className="form-group">
+                        <label >Name</label>
+                        <input type="text" className="form-control" placeholder="Input field" />
                     </div>
-                </div>
+                    <div className="form-group">
+                        <label >Price</label>
+                        <input type="text" className="form-control" placeholder="Input field" />
+                    </div>
+                    <div className="form-group">
+                        <label >Status</label>
+                    </div>
+
+                    <div className="checkbox">
+                        <label>
+                            <input type="checkbox" />
+                            Available
+                    </label>
+                    </div>
+                    <button type="submit" className="btn btn-primary">Add</button>
+                </form>
             </div>
         );
     }
