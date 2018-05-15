@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import callApi from '../utils/apiCaller';
+import { Link } from 'react-router-dom';
 
 class App extends Component {
     constructor(props) {
@@ -14,7 +16,7 @@ class App extends Component {
     onChange = (e) => {
         var target = e.target;
         var name = target.name;
-        var value = target.type==='checkbox' ? target.checked : target.value;
+        var value = target.type === 'checkbox' ? target.checked : target.value;
         this.setState({
             [name]: value
         })
@@ -23,7 +25,16 @@ class App extends Component {
 
     onSubmit = (e) => {
         e.preventDefault();
-        console.log(this.state);
+        var { txtName, txtPrice, chkStatus } = this.state;
+        var { history } = this.props;
+        callApi('products', 'POST', {
+            name: txtName,
+            price: txtPrice,
+            status: chkStatus,
+        }).then(res => {
+            history.goBack();
+
+        });
     }
     render() {
         const { txtName, txtPrice, chkStatus } = this.state;
@@ -54,7 +65,6 @@ class App extends Component {
                     <div className="form-group">
                         <label >Status</label>
                     </div>
-
                     <div className="checkbox">
                         <label>
                             <input
@@ -66,7 +76,8 @@ class App extends Component {
                             Available
                     </label>
                     </div>
-                    <button type="submit" className="btn btn-primary">Add</button>
+                    <Link to="/product-list" className="btn btn-danger">Return</Link>&nbsp;
+                    <button type="submit" className="btn btn-primary"> Add </button>
                 </form>
             </div>
         );

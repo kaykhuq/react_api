@@ -1,16 +1,34 @@
 {
-	"products":[
-		{
-			"id":1,
-			"name":"iphone",
-			"price":500,
-			"status":true
-		},
-		{
-			"id":2,
-			"name":"samsung",
-			"price":300,
-			"status":false
-		}
-	]
+  "products": [
+    {
+      "id": 1,
+      "name": "iphone",
+      "price": 500,
+      "status": true
+    },
+    {
+      "id": 2,
+      "name": "samsung",
+      "price": 300,
+      "status": false
+    },
+    {
+      "name": "",
+      "price": "",
+      "status": "",
+      "id": 3
+    },
+    {
+      "name": "xiaomi",
+      "price": "100",
+      "status": "",
+      "id": 4
+    },
+    {
+      "name": "Mizu",
+      "price": "150",
+      "status": true,
+      "id": 5
+    }
+  ]
 }
