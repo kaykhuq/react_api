@@ -8,8 +8,8 @@
 		},
 		{
 			"id":2,
-			"name":"iphone",
-			"price":500,
+			"name":"samsung",
+			"price":300,
 			"status":false
 		}
 	]

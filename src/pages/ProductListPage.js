@@ -2,16 +2,29 @@ import React, { Component } from 'react';
 import ProductList from '../components/ProductList';
 import ProductItem from '../components/ProductItem';
 import { connect } from 'react-redux';
-
-
+import callApi from '../utils/apiCaller';
+import { Link } from 'react-router-dom';
 
 class ProductListPage extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            products: [],
+        }
+    }
+    componentDidMount() {
+        callApi('products', 'GET', null).then(res => {
+            this.setState({
+                products: res.data
+            });
+        });
+    }
     render() {
-        const { products } = this.props;
-        
+        const { products } = this.state;
+
         return (
             <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                <button type="button" className="btn btn-info mb-10">Add Product</button>
+                <Link to='/product/add' className="btn btn-info mb-10">Add Product</Link>
                 <ProductList >
                     {this.showProduct(products)}
                 </ProductList>
