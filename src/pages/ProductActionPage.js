@@ -12,7 +12,21 @@ class App extends Component {
             chkStatus: ''
         }
     }
-
+    componentDidMount() {
+        const { match } = this.props;
+        if (match) {
+            let id = match.params.id;
+            callApi(`products/${id}`, 'GET', null).then(res => {
+                let data = res.data;
+                this.setState({
+                    id: data.id,
+                    txtName: data.name,
+                    txtPrice: data.price,
+                    chkStatus: data.status
+                })
+            });
+        }
+    }
     onChange = (e) => {
         var target = e.target;
         var name = target.name;
@@ -25,16 +39,27 @@ class App extends Component {
 
     onSubmit = (e) => {
         e.preventDefault();
-        var { txtName, txtPrice, chkStatus } = this.state;
+        var { id, txtName, txtPrice, chkStatus } = this.state;
         var { history } = this.props;
-        callApi('products', 'POST', {
-            name: txtName,
-            price: txtPrice,
-            status: chkStatus,
-        }).then(res => {
-            history.goBack();
+        if (id) {//update
+            callApi(`products/${id}`,'PUT',{
+                name: txtName,
+                price: txtPrice,
+                status: chkStatus,
+            }).then(res=>{
+                history.goBack();
+            })
+        } else {//new
+            callApi('products', 'POST', {
+                name: txtName,
+                price: txtPrice,
+                status: chkStatus,
+            }).then(res => {
+                history.goBack();
+            });
+        }
 
-        });
+
     }
     render() {
         const { txtName, txtPrice, chkStatus } = this.state;
@@ -72,12 +97,13 @@ class App extends Component {
                                 name='chkStatus'
                                 value={chkStatus}
                                 onChange={this.onChange}
+                                checked={chkStatus}
                             />
                             Available
                     </label>
                     </div>
                     <Link to="/product-list" className="btn btn-danger">Return</Link>&nbsp;
-                    <button type="submit" className="btn btn-primary"> Add </button>
+                    <button type="submit" className="btn btn-primary"> Save </button>
                 </form>
             </div>
         );

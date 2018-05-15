@@ -1,6 +1,12 @@
 import React, { Component } from 'react';
-
+import { Link } from 'react-router-dom';
 class ProductItem extends Component {
+    onDelete = (id) => {
+        if (confirm('Are you sure to delete?')) {//eslint-disable-line
+            this.props.onDelete(id);
+        }
+    }
+
     render() {
         const { product, index } = this.props;
         const statusName = product.status ? 'Available' : 'Out of stock';
@@ -15,8 +21,8 @@ class ProductItem extends Component {
                     <span className={`label label-${statusClass}`}>{statusName}</span>
                 </td>
                 <td>
-                    <button type="button" className="btn btn-warning">Edit</button>&nbsp;
-                    <button type="button" className="btn btn-danger">Delete</button>
+                    <Link to={`product/${product.id}/edit`} className="btn btn-warning" >Edit</Link>&nbsp;
+                    <button type="button" className="btn btn-danger" onClick={() => this.onDelete(product.id)}>Delete</button>
                 </td>
             </tr>
         );

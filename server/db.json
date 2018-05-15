@@ -7,28 +7,34 @@
       "status": true
     },
     {
-      "id": 2,
-      "name": "samsung",
-      "price": 300,
-      "status": false
-    },
-    {
-      "name": "",
-      "price": "",
-      "status": "",
-      "id": 3
-    },
-    {
       "name": "xiaomi",
       "price": "100",
       "status": "",
       "id": 4
     },
     {
-      "name": "Mizu",
+      "name": "Mizu m4",
       "price": "150",
-      "status": true,
+      "status": false,
       "id": 5
+    },
+    {
+      "name": "Iphone 7 plus",
+      "price": "400",
+      "status": true,
+      "id": 6
+    },
+    {
+      "name": "Samsung galaxy s9",
+      "price": "1000",
+      "status": true,
+      "id": 7
+    },
+    {
+      "name": "Nokia 3",
+      "price": "100",
+      "status": true,
+      "id": 8
     }
   ]
 }
