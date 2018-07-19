@@ -7,12 +7,6 @@
       "id": 4
     },
     {
-      "name": "Mizu m4",
-      "price": "150",
-      "status": false,
-      "id": 5
-    },
-    {
       "name": "Iphone 7 plus",
       "price": "400",
       "status": true,
@@ -28,6 +22,25 @@
       "id": 8,
       "name": "Nokia 1202",
       "price": "100",
+      "status": true,
+      "id": 8
+    },
+    {
+      "name": "Mizu m4",
+      "price": "100",
+      "status": "",
+      "id": 9
+    },
+    {
+      "id": 10,
+      "name": "Ipad Air",
+      "price": "500",
+      "status": ""
+    },
+    {
+      "id": 11,
+      "name": "Motorola v9",
+      "price": "50",
       "status": true
     }
   ]

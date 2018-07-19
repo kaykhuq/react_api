@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
-import callApi from '../utils/apiCaller';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { actAddProductsRequest, actGetProductsRequest, actUpdateProductsRequest } from '../actions/index';
 
-class App extends Component {
+class ProductActionPage extends Component {
+
     constructor(props) {
         super(props);
         this.state = {
@@ -16,14 +18,18 @@ class App extends Component {
         const { match } = this.props;
         if (match) {
             let id = match.params.id;
-            callApi(`products/${id}`, 'GET', null).then(res => {
-                let data = res.data;
-                this.setState({
-                    id: data.id,
-                    txtName: data.name,
-                    txtPrice: data.price,
-                    chkStatus: data.status
-                })
+            this.props.onEditProduct(id);
+        }
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if (nextProps && nextProps.itemEditing) {
+            var { itemEditing } = nextProps;
+            this.setState({
+                id: itemEditing.id,
+                txtName: itemEditing.name,
+                txtPrice: itemEditing.price,
+                chkbStatus: itemEditing.status
             });
         }
     }
@@ -41,24 +47,18 @@ class App extends Component {
         e.preventDefault();
         var { id, txtName, txtPrice, chkStatus } = this.state;
         var { history } = this.props;
-        if (id) {//update
-            callApi(`products/${id}`,'PUT',{
-                name: txtName,
-                price: txtPrice,
-                status: chkStatus,
-            }).then(res=>{
-                history.goBack();
-            })
-        } else {//new
-            callApi('products', 'POST', {
-                name: txtName,
-                price: txtPrice,
-                status: chkStatus,
-            }).then(res => {
-                history.goBack();
-            });
+        var product = {
+            id: id,
+            name: txtName,
+            price: txtPrice,
+            status: chkStatus
         }
-
+        if (id) {//update
+            this.props.onUpdateProduct(product);
+        } else {//new
+            this.props.onAddProduct(product);
+        }
+        history.goBack();
 
     }
     render() {
@@ -110,4 +110,17 @@ class App extends Component {
     }
 }
 
-export default App;
+const mapStateToProps = (state) => {
+    return {
+        itemEditing: state.itemEditing
+    }
+}
+const mapDispatchToProps = (dispatch, props) => {
+    return {
+        onAddProduct: (product) => { dispatch(actAddProductsRequest(product)) },
+        onEditProduct: (id) => { dispatch(actGetProductsRequest(id)) },
+        onUpdateProduct: (product) => { dispatch(actUpdateProductsRequest(product)) }
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProductActionPage);
