@@ -1,12 +1,6 @@
 {
   "products": [
     {
-      "id": 1,
-      "name": "iphone",
-      "price": 500,
-      "status": true
-    },
-    {
       "name": "xiaomi",
       "price": "100",
       "status": "",
@@ -31,10 +25,10 @@
       "id": 7
     },
     {
-      "name": "Nokia 3",
+      "id": 8,
+      "name": "Nokia 1202",
       "price": "100",
-      "status": true,
-      "id": 8
+      "status": true
     }
   ]
 }
